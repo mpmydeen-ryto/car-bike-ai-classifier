@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Vehicle Classifier</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>🤖 AI Vehicle Classifier</h1>
+
+    <p class="subtitle">
+        Powered by TensorFlow Deep Learning
+    </p>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <div class="upload-box">
+
+            <input
+                type="file"
+                name="image"
+                id="imageInput"
+                accept="image/*"
+                required
+            >
+
+        </div>
+
+        <img id="preview">
+
+        <button type="submit">
+            🔍 Predict
+        </button>
+
+    </form>
+
+    {% if prediction %}
+
+    <div class="result">
+
+        {% if prediction == "bike" %}
+        <span class="bike-badge">
+            🏍 BIKE
+        </span>
+        {% endif %}
+
+        {% if prediction == "car" %}
+        <span class="car-badge">
+            🚗 CAR
+        </span>
+        {% endif %}
+
+        <div class="confidence">
+            Confidence : {{ confidence }}%
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar"
+                 style="width: {{ confidence }}%;">
+            </div>
+        </div>
+
+    </div>
+
+    {% endif %}
+
+    <div class="footer">
+        Built with Python • Flask • TensorFlow
+    </div>
+
+</div>
+
+<script>
+
+document
+.getElementById("imageInput")
+.onchange = function(event){
+
+    let reader = new FileReader();
+
+    reader.onload = function(){
+
+        let preview =
+        document.getElementById("preview");
+
+        preview.src = reader.result;
+        preview.style.display = "block";
+    }
+
+    reader.readAsDataURL(
+        event.target.files[0]
+    );
+};
+
+</script>
+
+</body>
+</html>
