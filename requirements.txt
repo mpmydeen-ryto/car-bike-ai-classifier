@@ -1,8 +1,5 @@
 Flask==3.1.1
 gunicorn==23.0.0
 numpy==1.26.4
-pillow==10.4.0
-tensorflow-cpu==2.18.0
-pip>=26.1.2
-setuptools
-wheel
+Pillow==10.2.0
+tensorflow==2.18.0
